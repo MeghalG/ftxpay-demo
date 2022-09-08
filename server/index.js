@@ -15,6 +15,11 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
+
+app.get("/order", (req, res) => {
+  res.json(getOrder(req.query.id))
+});
+
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));

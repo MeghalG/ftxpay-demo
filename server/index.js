@@ -2,6 +2,8 @@
 
 const path = require('path');
 const express = require("express");
+const {getOrder, createOrder, getOrdersByUser, cancelOrder, returnOrder} = require("./orders");
+const {getAvailableItems} = require("./items");
 
 const PORT = process.env.PORT || 3002;
 
@@ -15,9 +17,32 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-
 app.get("/order", (req, res) => {
   res.json(getOrder(req.query.id))
+});
+
+
+app.get("/items", (req, res) => {
+  res.json(getAvailableItems(req.query.id))
+});
+
+app.post("/order", (req, res) => {
+  res.json(createOrder(req.body.items,req.body.user))
+});
+
+app.post("/order/cancel", (req, res) => {
+  const order = getOrder(req.body.id)
+  res.json(cancelOrder(order))
+});
+
+app.post("/order/return", (req, res) => {
+  const order = getOrder(req.body.id)
+  res.json(returnOrder(order))
+});
+
+
+app.get("/user/get_orders", (req, res) => {
+  res.json(getOrdersByUser(req.query.user))
 });
 
 // All other GET requests not handled before will return our React app

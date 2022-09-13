@@ -1,16 +1,16 @@
 // server/index.js
 
-const path = require('path');
-const express = require("express");
-const {getOrder, createOrder, getOrdersByUser, cancelOrder, returnOrder} = require("./orders");
-const {getAvailableItems} = require("./items");
+import express from "express";
+import * as path from "path";
+import {cancelOrder, createOrder, getOrder, getOrdersByUser, returnOrder} from "./orders.js";
+import {getAvailableItems} from "./items.js";
 
 const PORT = process.env.PORT || 3002;
 
 const app = express();
 
 // Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve('../client/build')));
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
@@ -18,9 +18,9 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/order", (req, res) => {
-  res.json(getOrder(req.query.id))
+  res.json({message: 'order endpoint'});
+  res.json(getOrder(req.query.id));
 });
-
 
 app.get("/items", (req, res) => {
   res.json(getAvailableItems(req.query.id))

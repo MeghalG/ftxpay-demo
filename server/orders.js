@@ -1,5 +1,5 @@
-import {cancelFtxpayOrder, createFtxpayOrder, getFtxpayOrder, returnFtxpayOrder} from "./ftxpay";
-import {priceBasket} from "./items";
+import {cancelFtxpayOrder, createFtxpayOrder, getFtxpayOrder, returnFtxpayOrder} from "./ftxpay.js";
+import {priceBasket} from "./items.js";
 import * as res from "express";
 
 let orders = []

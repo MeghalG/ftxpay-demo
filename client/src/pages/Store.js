@@ -1,29 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Item from './../components/Item'
-import { Box, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import { Box, ImageList, ImageListItem, ImageListItemBar, Button, IconButton, Typography } from "@mui/material";
 
 
 function Store() {
-    return (
-        <Box display='flex' alignItems='center' justifyContent='center'>
-        <ImageList sx={{ maxWidth: 1000}} gap={50} cols={3}>
-            {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-                <img
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-                />
-                <ImageListItemBar
-                title={item.title}
-                position="below"
-                />
-            </ImageListItem>
-            ))}
-        </ImageList>
-        </Box>
-    );
+  return (
+      <Box display='flex' alignItems='center' justifyContent='center'>
+      <ImageList sx={{ maxWidth: 1000}} gap={50} cols={3}>
+          {itemData.map((item) => (
+            <Item item={item}/>
+          ))}
+      </ImageList>
+      </Box>
+  );
 }
 
     const itemData = [

@@ -14,12 +14,24 @@ function Item(props) {
     }
 
     const removeFromCart = (e, key) => {
-        setQty(Math.max(qty-1,0))
+        if (qty>1) {
+            setQty(qty-1);
+        }
+        else {
+            setQty(Math.max(qty-1,0))
+        }
     }
 
     useEffect(() => {
-        const cart={...JSON.parse(localStorage.getItem('cart')), [props.item.img]:qty};
-		localStorage.setItem('cart', JSON.stringify(cart));
+        if (qty>0) {
+            const cart={...JSON.parse(localStorage.getItem('cart')), [props.item.img]:qty};
+		    localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        else {
+            const cart=JSON.parse(localStorage.getItem('cart'));
+            delete cart[props.item.img];
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
 	}, [qty]);
 
     return (

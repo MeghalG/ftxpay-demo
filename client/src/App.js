@@ -38,15 +38,15 @@ function App() {
               <Link style={{textDecoration: 'none', color:'white'}} to="/">Candy Store </Link>
           </Typography>
           <Button style={{textTransform:'none'}}>
-            <Typography variant="subtitle1" to="/">
+            <Typography variant="subtitle1" to="/Orders">
               <Link style={{textDecoration: 'none', color:'white'}} to="/">Orders</Link>
             </Typography>
           </Button>
-          <Divider orientation="vertical" variant="middle" flexItem style={{margin:15}}/>
+          <Divider orientation="vertical" variant="middle" flexItem sx={{margin:2}}/>
           <Link to="/Cart">
             <IconButton style={{ color: 'white'}}><ShoppingCartIcon /></IconButton>
           </Link>
-          <Divider orientation="vertical" variant="middle" flexItem style={{margin:15}}/>
+          <Divider orientation="vertical" variant="middle" flexItem sx={{margin:2}}/>
           <Typography variant="subtitle1" >
               {userID}
           </Typography>
@@ -55,6 +55,7 @@ function App() {
       </AppBar>
       <Routes>
         <Route exact path="/" element={<Store key={userID}/>}/>
+        <Route exact path="/Cart" element={<Checkout key={userID}/>}/>
       </Routes>
       <LoginDialog onClose={handleLogin} open={!userID}/>
     </div>

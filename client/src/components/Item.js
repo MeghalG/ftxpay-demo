@@ -7,7 +7,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 
 function Item(props) {
-    const [qty, setQty] = useState(JSON.parse(localStorage.getItem('cart'))[props.item.img] || 0);
+    const [qty, setQty] = useState((JSON.parse(localStorage.getItem('cart'))||[])[props.item.img] || 0);
 
     const addToCart = (e, key) => {
         setQty(qty+1)

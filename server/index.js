@@ -19,7 +19,6 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/order", (req, res) => {
-  res.json({message: 'order endpoint'});
   res.json(getOrder(req.query.id));
 });
 
@@ -28,7 +27,7 @@ app.get("/items", (req, res) => {
 });
 
 app.post("/order", (req, res) => {
-  res.json(createOrder(req.body.items,req.body.user))
+  res.json(createOrder(JSON.parse(req.body.items),req.body.user))
 });
 
 app.post("/order/cancel", (req, res) => {

@@ -93,5 +93,5 @@ export function getAvailableItems() {
 
 
 export function priceBasket(items) {
-    return items.map(item => item.quantity * item.price).reduce((a, b) => a + b, 0)
+    return items.map(item => all_items.find(items.id).price * item.quantity).reduce((a, b) => a + b, 0)
 }

@@ -12,13 +12,6 @@ import { BrowserRouter as Router, Route, Link, Routes} from "react-router-dom";
 
 function App() {
   const [userID, setUserID] = React.useState(localStorage.getItem('userID'));
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
 
   const handleLogout = (e) => {
       localStorage.clear();

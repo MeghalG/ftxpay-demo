@@ -11,6 +11,7 @@ const app = express();
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve('../client/build')));
+app.use(express.json());
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
@@ -27,6 +28,7 @@ app.get("/items", (req, res) => {
 });
 
 app.post("/order", (req, res) => {
+  console.log(req.body);
   res.json(createOrder(req.body.items,req.body.user))
 });
 

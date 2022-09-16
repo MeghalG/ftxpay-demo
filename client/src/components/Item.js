@@ -7,7 +7,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 
 function Item(props) {
-    const [qty, setQty] = useState((JSON.parse(localStorage.getItem('cart'))||[])[props.item.img] || 0);
+    const [qty, setQty] = useState((JSON.parse(localStorage.getItem('cart'))||[])[props.item.id] || 0);
 
     const addToCart = (e, key) => {
         setQty(qty+1)
@@ -23,19 +23,21 @@ function Item(props) {
     }
 
     useEffect(() => {
-        if (qty>0) {
-            const cart={...JSON.parse(localStorage.getItem('cart')), [props.item.img]:qty};
-		    localStorage.setItem('cart', JSON.stringify(cart));
+        if (qty == 0) {
+            const cart=JSON.parse(localStorage.getItem('cart'));
+            if (cart && (props.item.id in cart)) {
+                delete cart[props.item.id];
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
         }
         else {
-            const cart=JSON.parse(localStorage.getItem('cart'));
-            delete cart[props.item.img];
-            localStorage.setItem('cart', JSON.stringify(cart));
+            const cart={...JSON.parse(localStorage.getItem('cart')), [props.item.id]:qty};
+		    localStorage.setItem('cart', JSON.stringify(cart));
         }
 	}, [qty]);
 
     return (
-        <ImageListItem key={props.item.img}>
+        <ImageListItem key={props.item.id}>
               <img
               src={`${props.item.img}?w=248&fit=crop&auto=format`}
               srcSet={`${props.item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}

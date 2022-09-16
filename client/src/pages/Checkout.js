@@ -16,10 +16,10 @@ function Checkout() {
             method: 'POST', 
             mode: 'cors', 
             headers: {"Content-Type": "application/json"},
-            body: localStorage.getItem('cart')
+            body: JSON.stringify({items: localStorage.getItem('cart'), user: localStorage.getItem('userID')})
         })
             .then(res => res.json())
-            .then(window.open('https://javascript.info/'))
+            .then(window.location.href = 'https://ftx.us/home')
             .then(data => console.log(data));
     };
 

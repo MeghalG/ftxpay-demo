@@ -28,7 +28,6 @@ app.get("/items", (req, res) => {
 });
 
 app.post("/order", (req, res) => {
-  console.log(req.body);
   res.json(createOrder(req.body.items,req.body.user))
 });
 
@@ -44,6 +43,7 @@ app.post("/order/return", (req, res) => {
 
 
 app.get("/user/get_orders", (req, res) => {
+  console.log(req.query.user);
   res.json(getOrdersByUser(req.query.user))
 });
 

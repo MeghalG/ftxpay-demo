@@ -25,6 +25,7 @@ export function createOrder(items, user) {
     const ftxpayOrderId = createFtxpayOrder(priceBasket(items), user)
     const newOrder = {id, items, user, ftxpayOrderId, status: "incomplete"}
     orders.push(newOrder)
+    console.log(orders)
     return newOrder
 }
 

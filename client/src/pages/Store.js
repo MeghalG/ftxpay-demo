@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Item from './../components/Item'
 import { Box, ImageList } from "@mui/material";
 
+// Page to show the list of available items in the store as Item objects.
 
 function Store() {
 

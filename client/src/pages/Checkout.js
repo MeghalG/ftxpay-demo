@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Divider, List, ListItem, ListItemText, ListItemAvatar, ListItemIcon, Typography, Box} from "@mui/material";
+import { Button, Divider, List, ListItem, ListItemText, ListItemAvatar, Box} from "@mui/material";
+
+// Page to show user's cart and allow checkout with FTX Pay.
 
 function Checkout() {
     const [itemData, setItemData] = useState({})
@@ -11,16 +13,16 @@ function Checkout() {
     }, []);
 
     const handleClick = () => {
-        console.log(JSON.parse(localStorage.getItem('cart')))
+        const request = JSON.stringify({items: localStorage.getItem('cart'), user: localStorage.getItem('userID')});
+        localStorage.setItem('cart', '{}')
         fetch('/order', {
             method: 'POST', 
             mode: 'cors', 
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({items: localStorage.getItem('cart'), user: localStorage.getItem('userID')})
+            body: request
         })
             .then(res => res.json())
-            .then(window.location.href = 'https://ftx.us/home')
-            .then(data => console.log(data));
+            .then(window.location.href = 'https://ftx.us/home');
     };
 
     return (
@@ -54,7 +56,7 @@ function Checkout() {
             ))}
         </List>
         <Divider orientation="vertical" variant='middle' flexItem sx={{marginTop:3, marginBottom:3, marginLeft:20, marginRight:10}}/>
-        <Button variant='contained' onClick={handleClick}>
+        <Button variant='contained' onClick={handleClick} disabled={localStorage.getItem('cart')==='{}'}>
             Pay with FTX
         </Button>
         </Box>

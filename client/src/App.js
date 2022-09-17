@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './App.css';
 import Store from './pages/Store'
 import Checkout from './pages/Checkout'
@@ -29,7 +29,7 @@ function App() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }} to="/">
-              <Link style={{textDecoration: 'none', color:'white'}} to="/">Candy Store </Link>
+              <Link style={{textDecoration: 'none', color:'white'}} to="/">Example Store </Link>
           </Typography>
           <Button style={{textTransform:'none'}}>
             <Typography variant="subtitle1">

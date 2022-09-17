@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Typography, ImageListItem, ImageListItemBar, Box, IconButton} from "@mui/material";
-import IceCreamIcon from "@mui/icons-material/Icecream";
+import { ImageListItem, ImageListItemBar, Box, IconButton} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-
+// Items displayed on the home page (Store). Includes functionality to add/remove items from cart.
 
 function Item(props) {
     const [qty, setQty] = useState((JSON.parse(localStorage.getItem('cart'))||[])[props.item.id] || 0);

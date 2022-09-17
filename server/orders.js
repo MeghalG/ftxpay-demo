@@ -23,9 +23,8 @@ export function getOrdersByUser(user) {
 export function createOrder(items, user) {
     const id = uid()
     const ftxpayOrderId = createFtxpayOrder(priceBasket(items), user)
-    const newOrder = {id, items, user, ftxpayOrderId, status: "incomplete"}
+    const newOrder = {id, items, user, ftxpayOrderId, status: "incomplete"} // add date of order creation
     orders.push(newOrder)
-    console.log(orders)
     return newOrder
 }
 

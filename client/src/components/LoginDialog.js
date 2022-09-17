@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, TextField, Button, Checkbox, DialogTitle, DialogContent, DialogActions, FormControlLabel} from "@mui/material";
 
+// Dialog box that pops up when there is no user ID (user must log in)
 
 function LoginDialog(props) {
     const [open, setOpen] = React.useState(!localStorage.getItem('userID'));

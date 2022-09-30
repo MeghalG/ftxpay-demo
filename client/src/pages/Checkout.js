@@ -3,8 +3,10 @@ import { Button, Divider, List, ListItem, ListItemText, ListItemAvatar, Box} fro
 
 // Page to show user's cart and allow checkout with FTX Pay.
 
+const appId = "6845"
+
 function Checkout() {
-    const [itemData, setItemData] = useState({})
+    const [itemData, setItemData] = useState(undefined)
 
     useEffect(() => {
         fetch('/items')
@@ -22,13 +24,13 @@ function Checkout() {
             body: request
         })
             .then(res => res.json())
-            .then(window.location.href = 'https://ftx.us/home');
+            .then(result => result.ftxpayOrderId && (window.location.href = 'https://ftx.us/pay/request?id='+appId+"&orderId="+result.ftxpayOrderId));
     };
 
     return (
         <Box display='flex' alignItems='center' justifyContent='center'>
         <List sx={{ maxWidth: 1000 }}>
-            {Object.entries(JSON.parse(localStorage.getItem('cart'))).map(item => (
+            {itemData && Object.entries(JSON.parse(localStorage.getItem('cart'))).map(item => (
                 <ListItem >
                     <ListItemAvatar sx={{marginRight:3}}>
                     <img

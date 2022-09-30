@@ -22,7 +22,7 @@ function Item(props) {
     }
 
     useEffect(() => {
-        if (qty == 0) {
+        if (qty === 0) {
             const cart=JSON.parse(localStorage.getItem('cart'));
             if (cart && (props.item.id in cart)) {
                 delete cart[props.item.id];
@@ -37,7 +37,7 @@ function Item(props) {
 
     return (
         <ImageListItem key={props.item.id}>
-              <img
+            <img
               src={`${props.item.img}?w=248&fit=crop&auto=format`}
               srcSet={`${props.item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
               alt={props.item.title}

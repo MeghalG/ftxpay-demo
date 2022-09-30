@@ -5,7 +5,7 @@ import Checkout from './pages/Checkout'
 import Orders from './pages/Orders'
 import LoginDialog from './components/LoginDialog'
 
-import { Button, Toolbar, Typography, Avatar, AppBar, IconButton, Divider } from "@mui/material";
+import { Button, Toolbar, Typography, AppBar, IconButton, Divider } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { BrowserRouter as Router, Route, Link, Routes} from "react-router-dom";

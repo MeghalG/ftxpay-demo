@@ -4,6 +4,7 @@ import express from "express";
 import * as path from "path";
 import {cancelOrder, createOrder, getOrder, getOrdersByUser, returnOrder} from "./orders.js";
 import {getAvailableItems} from "./items.js";
+import * as res from "express";
 
 const PORT = process.env.PORT || 3002;
 
@@ -18,37 +19,39 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.get("/order", (req, res) => {
-  res.json(getOrder(req.query.id));
+app.get("/order", async (req, res) => {
+  res.json(await getOrder(req.query.id));
 });
 
 app.get("/items", (req, res) => {
   res.json(getAvailableItems(req.query.id))
 });
 
-app.post("/order", (req, res) => {
-  res.json(createOrder(JSON.parse(req.body.items),req.body.user))
+app.post("/order", async (req, res) => {
+  res.json(await createOrder(JSON.parse(req.body.items), req.body.user))
 });
 
-app.post("/order/cancel", (req, res) => {
-  const order = getOrder(req.body.id)
-  res.json(cancelOrder(order))
+app.post("/order/cancel", async (req, res) => {
+  const order = await getOrder(req.body.id)
+  res.json(await cancelOrder(order))
 });
 
-app.post("/order/return", (req, res) => {
-  const order = getOrder(req.body.id)
-  res.json(returnOrder(order))
+app.post("/order/return", async (req, res) => {
+  const order = await getOrder(req.body.id)
+  res.json(await returnOrder(order))
 });
 
 
-app.get("/user/get_orders", (req, res) => {
+app.get("/user/get_orders", async (req, res) => {
   console.log(req.query.user);
-  res.json(getOrdersByUser(req.query.user))
+  res.json(await getOrdersByUser(req.query.user))
 });
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  console.log(req.url)
+  console.log('unhandled')
+  res.status(404)
 });
 
 app.listen(PORT, () => {

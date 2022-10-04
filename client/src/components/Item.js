@@ -52,9 +52,14 @@ function Item(props) {
                 </Box>
               }
               subtitle={
-                <Box display='flex' alignItems='center' justifyContent='center' color='#2196f3'>
-                  Qty: {qty || 0}
-                </Box>
+                <>
+                    <Box display='flex' alignItems='center' justifyContent='center'>
+                        ${props.item.price.toFixed(2)}
+                    </Box>
+                    <Box display='flex' alignItems='center' justifyContent='center' color='#2196f3'>
+                        Qty: {qty || 0}
+                    </Box>
+                </>
               }
               position="below"
               />

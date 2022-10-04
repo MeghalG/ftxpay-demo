@@ -3,18 +3,33 @@ import { Alert, Button, Divider, Card, List, ListItem, ListItemText, ListItemAva
 
 // Display for individual order on (past) orders page. Includes status of the order.
 
-const appId = "6845"
+function AdminOrder(props) {
 
-function Order(props) {
+    const cancelOrder = () => {
+        const request = JSON.stringify({id: props.order.id});
+        fetch('/order/cancel', {
+            method: 'POST', 
+            mode: 'cors', 
+            headers: {"Content-Type": "application/json"},
+            body: request
+        });
+    };
 
-    const handleClick = () => {
-        window.location.href = 'https://ftx.us/pay/request?id='+appId+"&orderId="+props.order.id;
+    const returnOrder = () => {
+        const request = JSON.stringify({id: props.order.id});
+        fetch('/order/return', {
+            method: 'POST', 
+            mode: 'cors', 
+            headers: {"Content-Type": "application/json"},
+            body: request
+        });
     };
 
     return (
         <ListItem >
             <Card variant='outlined' sx={{padding:2, width:'100%'}}> 
-                <Typography variant='h5'> Order #: {props.order.id} </Typography>
+                <Typography variant='h5'> Order Code: {props.order.id} </Typography>
+                <Typography variant='h6'> User: {props.order.user} </Typography>
                 <Box sx={{display:'flex', paddingLeft:5}} >
                 <List>
                     {Object.entries(props.order.items).map((item) => (
@@ -50,23 +65,29 @@ function Order(props) {
                         <React.Fragment>
                         Total: ${(getTotal(props.order, (props.data || {})) || 0).toFixed(2)}
                         <br />
-                        Ordered On: {new Date(props.order.createdAt).toDateString()}
+                        Order date: {props.order.date}
                         </React.Fragment>
                         <br />
                         {props.order.status==='incomplete' &&
-                            <Button onClick={handleClick} variant='contained' >
-                                Pay with FTX 
-                            </Button>
-                        }
-                        {props.order.status==='complete' &&
-                            <Alert severity='success' >
-                                Your payment is complete.
+                            <><Alert severity='error'>
+                                        Not yet paid.
                             </Alert>
+                            <Button onClick={cancelOrder} variant='contained' sx={{marginTop:1}}> 
+                                Cancel
+                            </Button></>
                         }
                         {props.order.status!=='incomplete' && props.order.status!=='complete' &&
                             <Alert severity='info' >
-                                Your order status is {props.order.status}.
+                                Order status is {props.order.status}.
                             </Alert>
+                        }
+                        {props.order.status==='complete' &&
+                            <><Alert severity='success' >
+                                Payment is complete.
+                            </Alert>
+                            <Button onClick={returnOrder} variant='contained' sx={{marginTop:1}}> 
+                                Return
+                            </Button></>
                         }
                     </Box>
                 }
@@ -81,4 +102,4 @@ function getTotal(order, data) {
     return Object.keys(order.items).map(id => (data[id] ||{}).price * order.items[id]).reduce((a, b) => a + b, 0)
 }
 
-export default Order;
+export default AdminOrder;

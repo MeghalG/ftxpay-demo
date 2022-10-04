@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { List, Box} from "@mui/material";
-import Order from './../components/Order'
+import AdminOrder from './../components/AdminOrder'
 
-// Page to show past orders
+// Admin page to see all past orders and return/cancel them.
 
-function Orders() {
+function Admin() {
     const [orders, setOrders] = useState([]);
     const [itemData, setItemData] = useState({});
 
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch('/user/get_orders?user='+localStorage.getItem('userID'))
+            fetch('/get_orders')
                 .then(res => res.json())
-                .then(data=>setOrders(data));
+                .then(res =>setOrders(res))
+                .then(res => console.log(orders,"hi"));
             }, 200);
         return () => clearInterval(interval);
     }, []);
@@ -27,11 +28,11 @@ function Orders() {
         <Box alignItems='center' justifyContent='center' display='flex'>
         <List sx={{ maxWidth: 1000 }}>
             {orders.map((order) => (
-                <Order order={order} data={itemData} />
+                <AdminOrder order={order} data={itemData} />
             ))}
         </List>
         </Box>
     );
 }
 
-export default Orders;
+export default Admin;

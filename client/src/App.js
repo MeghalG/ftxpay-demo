@@ -3,6 +3,7 @@ import './App.css';
 import Store from './pages/Store'
 import Checkout from './pages/Checkout'
 import Orders from './pages/Orders'
+import Admin from './pages/Admin'
 import LoginDialog from './components/LoginDialog'
 
 import { Button, Toolbar, Typography, AppBar, IconButton, Divider } from "@mui/material";
@@ -33,6 +34,12 @@ function App() {
           </Typography>
           <Button style={{textTransform:'none'}}>
             <Typography variant="subtitle1">
+              <Link style={{textDecoration: 'none', color:'white'}} to="/Admin">Admin View </Link>
+            </Typography>
+          </Button>
+          <Divider orientation="vertical" variant="middle" flexItem sx={{margin:2}}/>
+          <Button style={{textTransform:'none'}}>
+            <Typography variant="subtitle1">
               <Link style={{textDecoration: 'none', color:'white'}} to="/Orders">Orders</Link>
             </Typography>
           </Button>
@@ -51,6 +58,7 @@ function App() {
         <Route exact path="/" element={<Store key={userID}/>}/>
         <Route exact path="/Cart" element={<Checkout key={userID}/>}/>
         <Route exact path="/Orders" element={<Orders key={userID}/>}/>
+        <Route exact path="/Admin" element={<Admin key={userID}/>}/>
       </Routes>
       <LoginDialog onClose={handleLogin} open={!userID}/>
     </div>

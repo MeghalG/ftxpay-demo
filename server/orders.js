@@ -14,8 +14,14 @@ export async function getOrder(orderId) {
     return order
 }
 
+// does this not delete other users' orders?
 export async function getOrdersByUser(user) {
-    orders = orders.filter(order => order.user === user)
+    let user_orders = orders.filter(order => order.user === user)
+    user_orders.forEach(await updateOrder)
+    return user_orders
+}
+
+export async function getAllOrders() {
     orders.forEach(await updateOrder)
     return orders
 }
@@ -23,7 +29,7 @@ export async function getOrdersByUser(user) {
 export async function createOrder(items, user) {
     const id = uid()
     const ftxpayOrderId = await createFtxpayOrder(priceBasket(items))
-    const newOrder = {id, items, user, ftxpayOrderId, createdAt: Date.now(),status: "incomplete"} // add date of order creation
+    const newOrder = {id, items, user, ftxpayOrderId, createdAt: Date.now(), status: "incomplete"} // add date of order creation
     orders.push(newOrder)
     return newOrder
 }

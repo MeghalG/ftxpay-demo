@@ -2,7 +2,7 @@
 
 import express from "express";
 import * as path from "path";
-import {cancelOrder, createOrder, getOrder, getOrdersByUser, returnOrder} from "./orders.js";
+import {cancelOrder, createOrder, getAllOrders, getOrder, getOrdersByUser, returnOrder} from "./orders.js";
 import {getAvailableItems} from "./items.js";
 import * as res from "express";
 
@@ -41,9 +41,12 @@ app.post("/order/return", async (req, res) => {
   res.json(await returnOrder(order))
 });
 
+app.get("/get_orders", async (req, res) => {
+  res.json(await getAllOrders())
+  console.log(await getAllOrders())
+});
 
 app.get("/user/get_orders", async (req, res) => {
-  console.log(req.query.user);
   res.json(await getOrdersByUser(req.query.user))
 });
 

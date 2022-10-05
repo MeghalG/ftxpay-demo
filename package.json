@@ -13,7 +13,7 @@
   "license": "ISC",
   "engines": {
     "npm": ">=7.0.0",
-    "node": ">=16.0.0"
+    "node": "16.x"
   },
   "dependencies": {
     "crypto-js": "^4.1.1",

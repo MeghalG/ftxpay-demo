@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3002;
 const app = express();
 
 // Have Node serve the files for our built React app
-app.use(express.static(path.resolve('../client/build')));
+app.use(express.static(path.resolve(__dirname,'../client/build')));
 app.use(express.json());
 
 // Handle GET requests to /api route

@@ -11,6 +11,7 @@ function LoginDialog(props) {
     const handleClose = () => {
         localStorage.setItem('userID', userID);
         localStorage.setItem('admin', JSON.stringify(admin))
+        setAdmin(false)
         props.onClose();
     };
 

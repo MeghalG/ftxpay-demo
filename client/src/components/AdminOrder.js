@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Alert, Button, Divider, Card, List, ListItem, ListItemText, ListItemAvatar, Typography, Box} from "@mui/material";
 
 // Display for individual order on (past) orders page. Includes status of the order.

@@ -23,6 +23,7 @@ function App() {
   const handleLogin = (e) => {
     setUserID(localStorage.getItem('userID'));
 };
+console.log(localStorage.getItem('admin'));
 
   return (
     <Router>
@@ -32,12 +33,12 @@ function App() {
           <Typography variant="h4" sx={{ flexGrow: 1 }} to="/">
               <Link style={{textDecoration: 'none', color:'white'}} to="/">Example Store </Link>
           </Typography>
-          <Button style={{textTransform:'none'}}>
-            <Typography variant="subtitle1">
-              <Link style={{textDecoration: 'none', color:'white'}} to="/Admin">Admin View </Link>
-            </Typography>
-          </Button>
-          <Divider orientation="vertical" variant="middle" flexItem sx={{margin:2}}/>
+          {JSON.parse(localStorage.getItem('admin')) && 
+            <><Button style={{ textTransform: 'none' }}>
+              <Typography variant="subtitle1">
+                <Link style={{ textDecoration: 'none', color: 'white' }} to="/Admin">Admin View </Link>
+              </Typography>
+            </Button><Divider orientation="vertical" variant="middle" flexItem sx={{ margin: 2 }} /></>}
           <Button style={{textTransform:'none'}}>
             <Typography variant="subtitle1">
               <Link style={{textDecoration: 'none', color:'white'}} to="/Orders">Orders</Link>

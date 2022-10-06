@@ -4,11 +4,14 @@ import express from "express";
 import * as path from "path";
 import {cancelOrder, createOrder, getAllOrders, getOrder, getOrdersByUser, returnOrder} from "./orders.js";
 import {getAvailableItems} from "./items.js";
+import { fileURLToPath } from 'url';
 import * as res from "express";
 
 const PORT = process.env.PORT || 3002;
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname,'../client/build')));
